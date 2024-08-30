@@ -12,7 +12,7 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
         page_size (int): The number of items per page
 
     Returns:
-        Tuple[int, int]: A tuple containing the start index and end index of the
+        Tuple[int, int]: A tuple containing the start index and end index
     """
     start = (page - 1) * page_size
     end = start + page_size
