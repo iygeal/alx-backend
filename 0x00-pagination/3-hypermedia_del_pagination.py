@@ -47,7 +47,8 @@ class Server:
         next_index = index
         current_page_size = 0
 
-        while current_page_size < page_size and next_index < len(self.indexed_dataset()):
+        while current_page_size < page_size and next_index < len(
+                self.indexed_dataset()):
             if next_index in self.indexed_dataset():
                 data.append(self.indexed_dataset()[next_index])
                 current_page_size += 1
