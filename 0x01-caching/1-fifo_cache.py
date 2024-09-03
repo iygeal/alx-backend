@@ -6,7 +6,9 @@ from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    """ FIFOCache is a caching system that follows FIFO (First-In, First-Out) """
+    """ FIFOCache is a caching system that follows
+        FIFO (First-In, First-Out)
+    """
 
     def __init__(self):
         """ Initialize the cache system """
