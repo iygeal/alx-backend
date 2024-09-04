@@ -15,14 +15,7 @@
 7. What the purpose of a caching system
 8. What limits a caching system have
 
-
 ### Caching System Project
 
 This project involves the implementation of various caching systems in Python.
 The caching systems include FIFO, LIFO, LRU, MRU, and LFU caches, among others.
-
-### BasicCache
-
-The `BasicCache` class is a simple caching system that doesn't have a limit.
-It inherits from the `BaseCaching` class and uses a dictionary to store the cache data.
-
