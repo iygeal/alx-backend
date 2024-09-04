@@ -23,7 +23,7 @@ class LFUCache(BaseCaching):
 
         # If the key already exists, update the item and frequency
         if key in self.cache_data:
-            self.cache_data[key] = item # Update the item
+            self.cache_data[key] = item  # Update the item
             self.freq[key] += 1  # Increment the frequency
             self.order.remove(key)
             self.order.append(key)  # Update the order
@@ -36,11 +36,12 @@ class LFUCache(BaseCaching):
 
                 # If there's a tie, use LRU to decide which to evict
                 if len(lfu_keys) > 1:
-                    # The first key in order list that matches the min frequency
+                    # The first key in order list that matches
+                    # the min frequency
                     for k in self.order:
                         if k in lfu_keys:
-                            lfu_key = k # Evict the LRU item
-                            break # Exit the loop
+                            lfu_key = k  # Evict the LRU item
+                            break  # Exit the loop
                 else:
                     lfu_key = lfu_keys[0]
 
