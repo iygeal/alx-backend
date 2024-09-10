@@ -17,12 +17,11 @@ class Config:
 
 app = Flask(__name__)
 app.config.from_object(Config)
-
 # Instantiate Babel as module-level variable
-babel = Babel(app)
 
 
-@babel.localeselector
+
+
 def get_locale() -> str:
     """
     Selects the best match for supported languages
@@ -31,6 +30,8 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+# Instantiate Babel as module-level variable
+babel = Babel(app, locale_selector=get_locale)
 @app.route('/')
 def index() -> str:
     """
