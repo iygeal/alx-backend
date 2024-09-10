@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Flask app with Babel locale selector.
+Flask app with gettext function for i18n.
 """
 
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, _
 
 
 class Config:
@@ -37,7 +37,8 @@ def index() -> str:
     """
     Returns the rendered index.html template.
     """
-    return render_template('2-index.html')
+    return render_template('3-index.html', home_title=_(
+        "home_title"), home_header=_("home_header"))
 
 
 if __name__ == "__main__":
