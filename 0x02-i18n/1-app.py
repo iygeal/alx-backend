@@ -23,7 +23,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index() -> str:
     """
     Returns the rendered index.html template.
@@ -32,4 +32,4 @@ def index() -> str:
 
 
 if __name__ == "__main__":
-    app.run(port="7000", host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=5000)
