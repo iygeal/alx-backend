@@ -9,7 +9,7 @@ app = Flask(__name__)
 babel = Babel(app)
 
 # Mock users "database"
-users = {
+users: dict[int, dict[str, str | None]] = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
@@ -20,9 +20,9 @@ users = {
 
 
 class Config:
-    LANGUAGES = ['en', 'fr']
-    BABEL_DEFAULT_LOCALE = 'en'
-    BABEL_DEFAULT_TIMEZONE = 'UTC'
+    LANGUAGES: list[str] = ['en', 'fr']
+    BABEL_DEFAULT_LOCALE: str = 'en'
+    BABEL_DEFAULT_TIMEZONE: str = 'UTC'
 
 
 app.config.from_object(Config)
@@ -30,21 +30,25 @@ app.config.from_object(Config)
 # Define the get_user function
 
 
-def get_user():
-    login_as = request.args.get('login_as')
-    if login_as:
-        try:
-            user_id = int(login_as)
-            return users.get(user_id)
-        except (ValueError, TypeError):
-            return None
+def get_user() -> dict[str, str | None] | None:
+    """
+    Returns the user object if a valid login_as parameter is provided
+    as a query string argument, otherwise returns None.
+
+    Returns:
+        dict[str, str | None] | None: The user object if the parameter is valid,
+        otherwise None.
+    """
+    id = request.args.get('login_as', None)
+    if id is not None and int(id) in users.keys():
+        return users.get(int(id))
     return None
 
 # Before request function
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """
     Store the user in g.user before each request.
 
@@ -56,23 +60,20 @@ def before_request():
 
 
 @babel.localeselector
-def get_locale():
-    # If user is logged in, use their locale
+def get_locale() -> str:
     """
     Selects the best match for supported languages.
 
     If the user is logged in, use their locale. If not, use the request
     or default behavior.
     """
-    if g.user and g.user.get("locale") in app.config['LANGUAGES']:
-        return g.user["locale"]
-    # Else, use the request or default behavior
-    return request.args.get('locale', request.accept_languages.best_match(
-        app.config['LANGUAGES']))
-
+    loc = request.args.get('locale')
+    if loc in app.config['LANGUAGES']:
+        return loc
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 @app.route('/')
-def index():
+def index() -> str:
     """
     Returns the rendered 5-index.html template as a str.
 
@@ -84,3 +85,4 @@ def index():
 
 if __name__ == "__main__":
     app.run()
+
