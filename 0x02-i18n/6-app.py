@@ -2,7 +2,7 @@
 """Flask app for handling i18n with user-specific and request-based locale"""
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
-from typing import Union, Dict, Optional
+from typing import Dict, Optional
 
 app = Flask(__name__)
 babel = Babel(app)
