@@ -20,9 +20,13 @@ msgstr ""
 
 #: templates/3-index.html:7
 msgid "home_title"
-msgstr "Bienvenue chez Holberton"
+msgstr "Bienvenue à Holberton"
 
-#: templates/3-index.html:10
 msgid "home_header"
-msgstr "Bonjour monde!"
+msgstr "Bonjour le monde!"
 
+msgid "logged_in_as"
+msgstr "Vous êtes connecté en tant que %(username)s."
+
+msgid "not_logged_in"
+msgstr "Vous n'êtes pas connecté."
