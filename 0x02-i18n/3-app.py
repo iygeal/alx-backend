@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Flask app with Babel that selects the best match for supported languages"""
+"""
+Flask app for i18n demo with user login simulation.
+
+Configures Flask-Babel for language localization.
+"""
 
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
