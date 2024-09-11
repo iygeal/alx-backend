@@ -1,28 +1,19 @@
 #!/usr/bin/env python3
-"""
-Flask app with gettext function for i18n.
-"""
+"""Flask app with Babel."""
 
-from flask import Flask, render_template, request
-from flask_babel import Babel
-
-class Config:
-    """
-    Config class for Babel setup.
-    """
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
-    BABEL_DEFAULT_TIMEZONE = "UTC"
-
+from flask import Flask, render_template, request, g
+from flask_babel import Babel, _
 
 app = Flask(__name__)
-app.config.from_object(Config)
-# Instantiate Babel as module-level variable
+app.config['BABEL_DEFAULT_LOCALE'] = 'en'
+app.config['BABEL_DEFAULT_TIMEZONE'] = 'UTC'
+app.config['LANGUAGES'] = ['en', 'fr']
+
+babel = Babel(app)
 
 
-
-
-def get_locale() -> str:
+@babel.localeselector
+def get_locale():
     """
     Selects the best match for supported languages
     using request.accept_languages.
@@ -30,15 +21,13 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-# Instantiate Babel as module-level variable
-babel = Babel(app, locale_selector=get_locale)
 @app.route('/')
-def index() -> str:
+def index():
     """
-    Returns the rendered index.html template.
+    Returns the rendered 3-index.html template.
     """
     return render_template('3-index.html')
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run()
