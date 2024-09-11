@@ -36,8 +36,8 @@ def get_user() -> dict[str, str | None] | None:
     as a query string argument, otherwise returns None.
 
     Returns:
-        dict[str, str | None] | None: The user object if the parameter is valid,
-        otherwise None.
+        dict[str, str | None] | None: The user object if the parameter
+        is valid, otherwise None.
     """
     id = request.args.get('login_as', None)
     if id is not None and int(id) in users.keys():
@@ -72,6 +72,7 @@ def get_locale() -> str:
         return loc
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 @app.route('/')
 def index() -> str:
     """
@@ -85,4 +86,3 @@ def index() -> str:
 
 if __name__ == "__main__":
     app.run()
-

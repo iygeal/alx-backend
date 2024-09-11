@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Flask app with Babel."""
+"""Flask app with Babel that selects the best match for supported languages"""
 
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
