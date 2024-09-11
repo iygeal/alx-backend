@@ -13,18 +13,24 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """
     Selects the best match for supported languages
     using request.accept_languages.
+
+    Returns:
+        The best match for supported languages.
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """
-    Returns the rendered 3-index.html template.
+    Returns the rendered 3-index.html template as a str.
+
+    Returns:
+        str: The rendered 3-index.html template.
     """
     return render_template('3-index.html')
 
